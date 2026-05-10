@@ -3,16 +3,16 @@
     "titulo": "Memória 0",
     "cards": [
       {
+        "imagem": "./assets/fotos/lembrança_0.png",
+        "texto": "tentando ilustrar esse momento que foi tão especial pra gente"
+      },
+      {
         "imagem": "./assets/fotos/foto_0.jpg",
         "texto": "Essa memória me doe ao mesmo tempo que me acalenta, lembrar desses momentos em certas horas me trouxe dor, culpa e saudade. Hoje eu olho pra isso com muita alegria não só por ter aprendido com esses sentimentos, mas pelo desfecho dessa jornada, ter você na minha vida é algo que me emociona sempre."
       },
       {
         "imagem": "./assets/fotos/foto_0.1.jpg",
         "texto": "Talvez a foto mais bonita que eu já tirei de você, ela sempre me pega de um jeito diferente, porque é uma das formas mais puras que eu tenho de demontrar o meu amor por você. Ela me traz muita felicidade por pensar que eu posso causar isso em você e eu quero criar mais momentos como esse até o fim dos meus dias."
-      },
-      {
-        "imagem": "./assets/fotos/lembrança_0.png",
-        "texto": "tentando ilustrar esse momento que foi tão especial pra gente"
       }
     ]
   },
@@ -20,107 +20,103 @@
     "titulo": "Memória 1",
     "cards": [
       {
+        "imagem": "./assets/fotos/lembrança_1.png",
+        "texto": "Aqui uma ilustração de um momento cômico mas emocionante, algo que você ansiava bastante e que fez eu sair do meu roteiro kkkkkkkkkkkkk, mas no fim deu tudo certo e eu sempre vou te amar Raquel Alvarez Cabral."
+      },
+      {
         "imagem": "./assets/fotos/foto_1.jpg",
-        "texto": ""
+        "texto": "Sempre que eu ver esse sorriso vou me emocionar, ainda me faz lembrar das primeiras vezes."
       },
       {
         "imagem": "./assets/fotos/foto_1.1.jpg",
-        "texto": ""
+        "texto": "Essa ilustra muito bem a nossa relação, você sem entender nada mas ao meu lado e eu calmo por fora mas com um frio na barriga."
       },
       {
         "imagem": "./assets/fotos/foto_1.2.jpg",
-        "texto": ""
-      },
-      {
-        "imagem": "./assets/fotos/lembrança_1.png",
-        "texto": ""
+        "texto": "Orgulhoso de olhar pra trás e ver esses momentos. Isso só me motiva a nós proporcionar mais, ser idiota, ser romantico, ser dramático, ser, ser com você."
       }
     ]
   },
-  "2": {
+  "mesa": {
     "titulo": "Memória 2",
     "cards": [
       {
         "imagem": "./assets/fotos/lembrança_2.png",
-        "texto": ""
+        "texto": "Aqui um momento que eu recomendo guardar pra você, ele ilustra uma das coisas que eu mais rio quando lembro, eu deixando um presente pra usar com você, ops em você e você confundido a minha mesa. KKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
       }
     ]
   },
-  "3": {
+  "soninho": {
     "titulo": "Memória 3",
     "cards": [
       {
         "imagem": "./assets/fotos/lembrança_3.png",
-        "texto": ""
+        "texto": "Aqui um momento parecido mas que sintetiza algo importante para mim. Eu lembro de você dormindo no ônibus e dando uma volta (sim estou rindo ao escrever). O importante aqui é que quando erramos isso não faz de nós montros, é somente um erro, as vezes nossa culpa, as vezes não, como foi aqui. Eu fui ensinado a cair e rir da queda, a levar as coisas com leveza e isso é algo que eu quero te passar meu amor, se você errar, se você se esquecer, se você cair, eu estou aqui e vou te ajudar a se levantar e rir disso."
       }
     ]
   },
-  "4": {
+  "pânico": {
     "titulo": "Memória 4",
     "cards": [
       {
         "imagem": "./assets/fotos/lembrança_4.png",
-        "texto": ""
+        "texto": "Essa memória tem esse título por ser um momento de tensão para nós, em que eu vi muito de como agimos ao sentir medo, nela por mais simples que pareça eu vejo como só mais um momento que me mostra que você é a mulher que eu escolhi, com quero passar a vida. Foi um dia muito legal e eu guardo com carinho, ter passado esse tempo com você."
       }
     ]
   },
-  "5": {
+  "café fofo": {
     "titulo": "Memória 5",
     "cards": [
       {
+        "imagem": "./assets/fotos/lembrança_5.png",
+        "texto": "Essa é uma memória antiga novamente, que eu guardo com muito carinho. Ela é simples mas me traz alegria em lembrar."
+      },
+      {
         "imagem": "./assets/fotos/foto_5.jpg",
-        "texto": ""
+        "texto": "Você com sempre linda, procurando peixes como sempre faz."
       },
       {
         "imagem": "./assets/fotos/foto_5.1.jpg",
-        "texto": ""
-      },
-      {
-        "imagem": "./assets/fotos/lembrança_5.png",
-        "texto": ""
+        "texto": "Eu guardo esse dia com muito carinho e é de momentos assim que eu quero fazer nossa vida daqui pra frente."
       }
     ]
   },
-  "6": {
+  "aniversário": {
     "titulo": "Memória 6",
     "cards": [
       {
         "imagem": "./assets/fotos/lembrança_6.png",
-        "texto": ""
+        "texto": "Essa é uma lembrança de um momento feliz, onde eu vi que sou cercado por pessoas boas e fico muito feliz por você estar nesse momento também. Seu bolo até hoje é lembrado kkkkkkkk"
       }
     ]
   },
-  "7": {
+  "1 segundo": {
     "titulo": "Memória 7",
     "cards": [
       {
         "imagem": "./assets/fotos/lembrança_7.png",
-        "texto": ""
+        "texto": "Aqui é a ilustração um momento que eu sempre vou guardar, pois foi o um segundo mais longo da minha vida, foi o momento que eu não conseguia mais segurar esse pedido e o abraço depois do seu tá bom foi algo que me viciou desde então kkkkkk. toda vez que você está nos meus braços eu me emociono ao lembrar disso."
       }
     ]
   },
-  "8": {
+  "aleatório": {
     "titulo": "Memória 8",
     "cards": [
       {
-        "imagem": "./assets/fotos/foto_8.jpg",
-        "texto": ""
-      },
-      {
-        "imagem": "./assets/fotos/foto_8.png",
-        "texto": ""
-      },
-      {
-        "imagem": "./assets/fotos/foto_8.1.png",
-        "texto": ""
-      },
-      {
         "imagem": "./assets/fotos/lembrança_8.png",
-        "texto": ""
+        "texto": "Aqui são formas de demonstrar que até nos momentos mais simples é onde está a beleza da nossa relação, eu sendo um palhaço e você toda linda kkkkkkkkkkkk"
       },
       {
         "imagem": "./assets/fotos/lembrança_8.1.png",
-        "texto": ""
+        "texto": "Uma caricatura desse momento kkkkkkk"
+      },
+      {
+        "imagem": "./assets/fotos/foto_8.png",
+        "texto": "olha sem dúvida eu me sentia como o cara na foto quando você sorri ou me olha, meu sistema da erro kkkkkkk"
+      },
+      {
+        "imagem": "./assets/fotos/foto_8.1.png",
+        "texto": "Eu sei que não gostaria de ver essa foto kkkk. Mas é aqui onde eu vou deixar um trecho importante pra mim. Raquel , eu te amo muito. eu quero que esse seja o primeiro de muitos aniversários e quando digo que escolhi você, as vezes parece mentira porque a sensação de fato é mais como seu eu não tivesse escolha, apareceu a mulher com quem vou casar kkkkk. Sério feliz um ano e um mês, há vários adjetivos que cabem a mim e louco é um deles e eu não me arrependo de ser louco e tentar a sorte nunca. Te amo meu lírio"
       }
     ]
   }
