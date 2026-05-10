@@ -4,21 +4,21 @@
  * Controla a interação do usuário com o decodificador de memórias:
  *  - Captura o clique no botão e a tecla Enter
  *  - Exibe o loader durante a requisição
- *  - Renderiza o resultado (texto, imagem ou vídeo) com animação
+ *  - Renderiza os cards da memória (foto + texto) com animação escalonada
  *  - Exibe mensagens de erro personalizadas
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ─── Elementos ───────────────────────────────────────
-    const inputCode    = document.getElementById('memory-code');
-    const btnDecode    = document.getElementById('btn-decode');
-    const loader       = document.getElementById('loader');
-    const resultArea   = document.getElementById('result-area');
-    const resultContent = document.getElementById('result-content');
-    const errorArea    = document.getElementById('error-area');
-    const errorText    = document.getElementById('error-text');
+    // ─── Elementos ────────────────────────────────────────
+    const inputCode     = document.getElementById('memory-code');
+    const btnDecode     = document.getElementById('btn-decode');
+    const errorArea     = document.getElementById('error-area');
+    const errorText     = document.getElementById('error-text');
+    const memorySection = document.getElementById('memory-section');
+    const memoryTitle   = document.getElementById('memory-title');
+    const memoryCards   = document.getElementById('memory-cards');
 
-    // ─── Event Listeners ─────────────────────────────────
+    // ─── Event Listeners ──────────────────────────────────
     btnDecode.addEventListener('click', handleDecode);
 
     inputCode.addEventListener('keydown', (e) => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ─── Handler principal ───────────────────────────────
+    // ─── Handler principal ────────────────────────────────
     async function handleDecode() {
         const codigo = inputCode.value.trim();
 
@@ -38,10 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Reset UI
         hideError();
-        hideResult();
-        showLoader();
+        hideMemory();
         btnDecode.disabled = true;
 
         try {
@@ -50,140 +48,101 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             showError(error.message);
         } finally {
-            hideLoader();
             btnDecode.disabled = false;
         }
     }
 
-    // ─── Renderização de Memória ─────────────────────────
+    // ─── Renderização ─────────────────────────────────────
 
     /**
-     * Renderiza o conteúdo de memória retornado pela API.
-     * Suporta os tipos: texto, imagem e video.
+     * Renderiza a memória como um grid de cards (foto + texto).
      *
-     * @param {Object} memoria - Objeto com { titulo?, tipo, conteudo }
+     * @param {Object} memoria - { titulo: string, cards: Array<{ imagem: string, texto: string }> }
      */
     function renderMemory(memoria) {
-        resultContent.innerHTML = '';
+        memoryCards.innerHTML = '';
 
-        // Título (se presente)
-        if (memoria.titulo) {
-            const title = document.createElement('h2');
-            title.className = 'memory-title';
-            title.textContent = memoria.titulo;
-            resultContent.appendChild(title);
-        }
+        // Título da memória
+        memoryTitle.textContent = memoria.titulo || '';
 
-        // Conteúdo por tipo
-        switch (memoria.tipo) {
-            case 'texto':
-                renderText(memoria.conteudo);
-                break;
+        // Grid: single ou multi-coluna
+        const isSingle = memoria.cards.length === 1;
+        memoryCards.className = isSingle
+            ? 'memory-cards memory-cards--single'
+            : 'memory-cards';
 
-            case 'imagem':
-                renderImage(memoria.conteudo, memoria.titulo);
-                break;
+        // Renderiza cada card com delay escalonado via CSS custom property
+        memoria.cards.forEach((card, index) => {
+            const article = createCard(card, index, memoria.titulo);
+            memoryCards.appendChild(article);
+        });
 
-            case 'video':
-                renderVideo(memoria.conteudo);
-                break;
-
-            default:
-                // Fallback: trata como texto
-                renderText(memoria.conteudo);
-        }
-
-        showResult();
-    }
-
-    function renderText(conteudo) {
-        const p = document.createElement('p');
-        p.className = 'memory-text';
-        p.textContent = conteudo;
-        resultContent.appendChild(p);
-    }
-
-    function renderImage(url, alt) {
-        const img = document.createElement('img');
-        img.className = 'memory-image';
-        img.src = url;
-        img.alt = alt || 'Memória em imagem';
-        img.loading = 'lazy';
-        resultContent.appendChild(img);
-    }
-
-    function renderVideo(url) {
-        // Detecta se é um link do YouTube e converte para embed
-        const embedUrl = convertToEmbed(url);
-
-        const iframe = document.createElement('iframe');
-        iframe.className = 'memory-video';
-        iframe.src = embedUrl;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        iframe.title = 'Vídeo de memória';
-        resultContent.appendChild(iframe);
+        showMemory();
     }
 
     /**
-     * Converte URLs de YouTube (watch, youtu.be, shorts) para o formato embed.
-     * Se não for YouTube, retorna a URL original.
+     * Cria um elemento <article> para um único card.
+     *
+     * @param {Object} card   - { imagem: string, texto: string }
+     * @param {number} index  - posição no array (para animação escalonada)
+     * @param {string} titulo - título da memória (para alt da imagem)
      */
-    function convertToEmbed(url) {
-        let videoId = null;
+    function createCard(card, index, titulo) {
+        const article = document.createElement('article');
+        article.className = 'memory-card';
+        article.style.setProperty('--card-index', index);
+        article.setAttribute('role', 'listitem');
 
-        // youtube.com/watch?v=ID
-        const watchMatch = url.match(/(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/);
-        if (watchMatch) videoId = watchMatch[1];
+        // Imagem
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'memory-card__image-wrap';
 
-        // youtu.be/ID
-        if (!videoId) {
-            const shortMatch = url.match(/(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-            if (shortMatch) videoId = shortMatch[1];
-        }
+        const img = document.createElement('img');
+        img.className = 'memory-card__image';
+        img.src = card.imagem;
+        img.alt = titulo
+            ? `${titulo} — foto ${index + 1}`
+            : `Memória, foto ${index + 1}`;
+        img.loading = 'lazy';
+        imageWrap.appendChild(img);
 
-        // youtube.com/shorts/ID
-        if (!videoId) {
-            const shortsMatch = url.match(/(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
-            if (shortsMatch) videoId = shortsMatch[1];
-        }
+        // Texto
+        const body = document.createElement('div');
+        body.className = 'memory-card__body';
 
-        if (videoId) {
-            return `https://www.youtube.com/embed/${videoId}`;
-        }
+        const text = document.createElement('p');
+        text.className = 'memory-card__text';
+        text.textContent = card.texto || '';
+        body.appendChild(text);
 
-        return url;
+        article.appendChild(imageWrap);
+        article.appendChild(body);
+        return article;
     }
 
-    // ─── UI Helpers ──────────────────────────────────────
+    // ─── UI Helpers ───────────────────────────────────────
 
-    function showLoader() {
-        loader.hidden = false;
+    function showMemory() {
+        memorySection.hidden = false;
+        // Re-trigger entrada animation
+        memorySection.style.animation = 'none';
+        void memorySection.offsetHeight;
+        memorySection.style.animation = '';
+        // Scroll suave até a seção de memórias
+        setTimeout(() => {
+            memorySection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 80);
     }
 
-    function hideLoader() {
-        loader.hidden = true;
-    }
-
-    function showResult() {
-        resultArea.hidden = false;
-        // Re-trigger bloom animation
-        resultArea.style.animation = 'none';
-        // Force reflow
-        void resultArea.offsetHeight;
-        resultArea.style.animation = '';
-    }
-
-    function hideResult() {
-        resultArea.hidden = true;
-        resultContent.innerHTML = '';
+    function hideMemory() {
+        memorySection.hidden = true;
+        memoryCards.innerHTML = '';
     }
 
     function showError(message) {
-        hideResult();
+        hideMemory();
         errorText.textContent = message;
         errorArea.hidden = false;
-        // Re-trigger fade-in
         errorArea.style.animation = 'none';
         void errorArea.offsetHeight;
         errorArea.style.animation = '';

@@ -1,59 +1,48 @@
 /**
- * api.js — Lógica de consumo da API
+ * api.js — Lógica de consumo dos dados de memórias
  *
- * Responsável por fazer requisições ao back-end Python (Flask)
- * para buscar memórias a partir de um código.
+ * Versão estática para GitHub Pages:
+ * Os dados são carregados do arquivo local data/memories.json.
+ * Nenhum servidor back-end é necessário.
+ *
+ * Formato de memories.json:
+ * {
+ *   "palavra-chave": {
+ *     "titulo": "Nome da memória",
+ *     "cards": [
+ *       { "imagem": "./assets/fotos/foto.jpg", "texto": "..." },
+ *       ...
+ *     ]
+ *   }
+ * }
  */
-
-const API_BASE_URL = 'http://localhost:5000/api';
 
 /**
- * Busca uma memória no servidor a partir do código fornecido.
+ * Busca uma memória a partir do código digitado.
  *
  * @param {string} codigo - O código encontrado na pétala da rosa.
- * @returns {Promise<Object>} Dados da memória retornados pela API.
- * @throws {Error} Lança erro com mensagens descritivas para cada cenário.
- *
- * Formato esperado de resposta da API (sucesso, status 200):
- * {
- *   "titulo":   "Nosso primeiro encontro",
- *   "tipo":     "texto" | "imagem" | "video",
- *   "conteudo": "Texto da memória..." | "url-da-imagem.jpg" | "url-do-video"
- * }
- *
- * Formato esperado de resposta da API (erro, status 404):
- * {
- *   "erro": "Memória não encontrada."
- * }
+ * @returns {Promise<Object>} Dados da memória: { titulo, cards[] }
+ * @throws {Error} Mensagens descritivas para código inválido ou falha de leitura.
  */
 async function fetchMemory(codigo) {
-    const url = `${API_BASE_URL}/memory/${encodeURIComponent(codigo)}`;
-
-    let response;
+    let todas;
 
     try {
-        response = await fetch(url);
-    } catch (networkError) {
-        throw new Error(
-            '🌐 Não foi possível conectar ao servidor. ' +
-            'Verifique se o back-end Python está rodando em http://localhost:5000.'
-        );
+        const response = await fetch('./data/memories.json');
+        if (!response.ok) throw new Error('file_not_found');
+        todas = await response.json();
+    } catch {
+        throw new Error('⚠️ Não foi possível carregar as memórias. Tente recarregar a página.');
     }
 
-    if (response.status === 404) {
+    const memoria = todas[codigo.trim().toLowerCase()];
+
+    if (!memoria) {
         throw new Error(
             '🔍 Código não encontrado. ' +
             'Verifique se digitou corretamente o código da pétala.'
         );
     }
 
-    if (!response.ok) {
-        throw new Error(
-            `⚠️ Ocorreu um erro inesperado (status ${response.status}). ` +
-            'Tente novamente em alguns instantes.'
-        );
-    }
-
-    const data = await response.json();
-    return data;
+    return memoria;
 }

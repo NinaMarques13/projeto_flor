@@ -35,6 +35,7 @@
             <p class="header__subtitle">Cada pétala guarda um segredo.<br>Digite o código e deixe a memória desabrochar.</p>
         </header>
 
+        <!-- Input card -->
         <section class="decoder" aria-label="Decodificador de memórias">
             <div class="decoder__card">
                 <div class="decoder__input-group">
@@ -53,27 +54,24 @@
                     </button>
                 </div>
 
-                <!-- Loading spinner -->
-                <div id="loader" class="loader" hidden>
-                    <div class="loader__spinner"></div>
-                    <p class="loader__text">Buscando memória...</p>
-                </div>
-
-                <!-- Result area -->
-                <div id="result-area" class="result" hidden>
-                    <div class="result__divider">
-                        <span class="result__divider-icon" aria-hidden="true">❀</span>
-                    </div>
-                    <div id="result-content" class="result__content">
-                        <!-- Dynamic content rendered by main.js -->
-                    </div>
-                </div>
-
                 <!-- Error area -->
                 <div id="error-area" class="error-message" hidden>
                     <p id="error-text" class="error-message__text"></p>
                 </div>
             </div>
+        </section>
+
+        <!-- Memory section — revealed after decoding -->
+        <section id="memory-section" class="memory-section" hidden aria-live="polite">
+            <div class="memory-section__header">
+                <div class="memory-divider" aria-hidden="true">
+                    <span class="memory-divider__icon">❀</span>
+                </div>
+                <h2 id="memory-title" class="memory-section__title"></h2>
+            </div>
+
+            <!-- Cards grid rendered by main.js -->
+            <div id="memory-cards" class="memory-cards" role="list"></div>
         </section>
 
         <footer class="footer">

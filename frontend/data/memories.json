@@ -1,0 +1,67 @@
+{
+  "0": {
+    "titulo": "Memória 0",
+    "cards": [
+      { "imagem": "./assets/fotos/foto_0.jpg",      "texto": "" },
+      { "imagem": "./assets/fotos/foto_0.1.jpg",    "texto": "" },
+      { "imagem": "./assets/fotos/lembrança_0.png", "texto": "" }
+    ]
+  },
+  "1": {
+    "titulo": "Memória 1",
+    "cards": [
+      { "imagem": "./assets/fotos/foto_1.jpg",      "texto": "" },
+      { "imagem": "./assets/fotos/foto_1.1.jpg",    "texto": "" },
+      { "imagem": "./assets/fotos/foto_1.2.jpg",    "texto": "" },
+      { "imagem": "./assets/fotos/lembrança_1.png", "texto": "" }
+    ]
+  },
+  "2": {
+    "titulo": "Memória 2",
+    "cards": [
+      { "imagem": "./assets/fotos/lembrança_2.png", "texto": "" }
+    ]
+  },
+  "3": {
+    "titulo": "Memória 3",
+    "cards": [
+      { "imagem": "./assets/fotos/lembrança_3.png", "texto": "" }
+    ]
+  },
+  "4": {
+    "titulo": "Memória 4",
+    "cards": [
+      { "imagem": "./assets/fotos/lembrança_4.png", "texto": "" }
+    ]
+  },
+  "5": {
+    "titulo": "Memória 5",
+    "cards": [
+      { "imagem": "./assets/fotos/foto_5.jpg",      "texto": "" },
+      { "imagem": "./assets/fotos/foto_5.1.jpg",    "texto": "" },
+      { "imagem": "./assets/fotos/lembrança_5.png", "texto": "" }
+    ]
+  },
+  "6": {
+    "titulo": "Memória 6",
+    "cards": [
+      { "imagem": "./assets/fotos/lembrança_6.png", "texto": "" }
+    ]
+  },
+  "7": {
+    "titulo": "Memória 7",
+    "cards": [
+      { "imagem": "./assets/fotos/lembrança_7.png", "texto": "" }
+    ]
+  },
+  "8": {
+    "titulo": "Memória 8",
+    "cards": [
+      { "imagem": "./assets/fotos/foto_8.jpg",        "texto": "" },
+      { "imagem": "./assets/fotos/foto_8.png",        "texto": "" },
+      { "imagem": "./assets/fotos/foto_8.1.png",      "texto": "" },
+      { "imagem": "./assets/fotos/lembrança_8.png",   "texto": "" },
+      { "imagem": "./assets/fotos/lembrança_8.1.png", "texto": "" }
+    ]
+  }
+}
