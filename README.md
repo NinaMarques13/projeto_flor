@@ -1,146 +1,141 @@
 # 🌹 Decodificação de Memórias
 
-Um site interativo e romântico de **"Decodificação de Memórias"** — um presente de namoro onde cada pétala de uma rosa de papel guarda um código secreto. Ao digitar o código no site, uma memória especial é revelada com uma animação delicada.
+Um site interativo e romântico onde cada pétala de uma rosa de papel guarda uma **palavra-chave secreta**. Ao digitá-la no site, uma memória especial é revelada com fotos e textos numa animação delicada.
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-/projeto-rosa
-├── backend/                    ← API em Python/Flask (futura implementação)
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── routes.py
-│   │   └── models.py
-│   ├── requirements.txt
-│   └── run.py
+/projeto_flor
+├── .github/
+│   └── workflows/
+│       └── static.yml          # Deploy automático no GitHub Pages (só frontend/)
 │
-├── frontend/                   ← Interface do usuário (Vanilla JS)
+├── backend/                    # Esqueleto Flask (uso local / futuro)
+│   ├── app/
+│   │   ├── __init__.py         # App factory com CORS
+│   │   ├── routes.py           # Rotas da API + dict MEMORIAS
+│   │   └── models.py           # Placeholder
+│   ├── requirements.txt        # flask, flask-cors
+│   └── run.py                  # python3 run.py
+│
+├── frontend/                   # Site estático (GitHub Pages)
 │   ├── assets/
 │   │   ├── css/
-│   │   │   └── style.css       # Estilos (rosa seco, off-white, dourado)
-│   │   └── images/             # Imagens do projeto
+│   │   │   └── style.css       # Estilos completos
+│   │   └── fotos/              # Todas as fotos e ilustrações
+│   ├── data/
+│   │   └── memories.json       # ← Edite aqui as memórias e textos
 │   ├── js/
-│   │   ├── api.js              # Consumo da API (fetch)
-│   │   └── main.js             # Manipulação de DOM e animações
-│   └── index.html              # Página principal
+│   │   ├── api.js              # Lê memories.json localmente
+│   │   └── main.js             # Renderiza os cards no DOM
+│   └── index.html              # Página única
 │
-└── README.md                   # Este arquivo
+├── fotos_flor/                 # Fonte original das fotos (backup)
+└── README.md
 ```
 
 ---
 
 ## 🎨 Design
 
-| Elemento   | Valor                                              |
-| ---------- | -------------------------------------------------- |
-| **Rosa Seco**  | `#DCAE96` — cor primária, tons quentes             |
-| **Off-white**  | `#F9F7F2` — fundo suave e clean                   |
-| **Dourado**    | `#C9A84C` — destaques e acentos elegantes          |
-| **Títulos**    | *Playfair Display* (serifada, clássica)             |
-| **Textos**     | *Lato* (sans-serif, moderna e legível)              |
+| Elemento       | Valor                                                   |
+| -------------- | ------------------------------------------------------- |
+| **Rosa Seco**  | `#DCAE96` — cor primária, tons quentes                  |
+| **Off-white**  | `#F9F7F2` — fundo suave e clean                         |
+| **Dourado**    | `#C9A84C` — destaques e acentos elegantes               |
+| **Títulos**    | *Playfair Display* (serifada, clássica)                  |
+| **Corpo**      | *Lato* (sans-serif, moderna e legível)                  |
+| **Textos card**| *Alegreya* (serifada expressiva, tamanho 1.15rem)       |
 
 ### Recursos visuais
 - Pétalas flutuantes animadas em CSS
-- Card com glassmorphism (backdrop-filter blur)
-- Animação "bloom" ao revelar a memória
+- Card com glassmorphism (`backdrop-filter: blur`)
+- Animação `card-bloom` escalonada ao revelar as memórias
+- Cards adaptativos — o tamanho é ditado pela foto, sem cortes
 - Design totalmente **responsivo** (mobile-first)
+- Grid de 2 colunas em telas ≥ 580px
 
 ---
 
-## 🚀 Como Rodar o Front-end
+## 🚀 Como Rodar
 
 ### Opção 1 — Abrir diretamente no navegador
-Basta abrir o arquivo `frontend/index.html` no navegador.
-
-> ⚠️ Sem o back-end rodando, o site exibirá a mensagem de erro de conexão — isso é o comportamento esperado.
+> ⚠️ Algumas funcionalidades podem não funcionar sem servidor (restrições de CORS ao carregar JSON local). Use a opção 2.
 
 ### Opção 2 — Servidor local (recomendado)
-Para evitar possíveis restrições de CORS ao testar com a API:
 
 ```bash
-# Na pasta do projeto
 cd frontend
-
-# Python 3
-python -m http.server 8080
-
+python3 -m http.server 8080
 # Acesse: http://localhost:8080
 ```
 
----
-
-## 🔌 Integração com a API
-
-O front-end consome a seguinte rota REST:
-
-```
-GET http://localhost:5000/api/memory/{codigo}
-```
-
-### Resposta esperada (sucesso — `200 OK`)
-
-```json
-{
-  "titulo": "Nosso primeiro encontro",
-  "tipo": "texto",
-  "conteudo": "Foi naquele café, no canto da janela..."
-}
-```
-
-**Tipos suportados** no campo `tipo`:
-
-| Tipo     | Comportamento do Front-end                           |
-| -------- | ---------------------------------------------------- |
-| `texto`  | Exibe o texto com estilo itálico elegante             |
-| `imagem` | Renderiza uma `<img>` com a URL de `conteudo`         |
-| `video`  | Incorpora um `<iframe>` (suporta YouTube embed auto)  |
-
-### Resposta esperada (erro — `404`)
-
-```json
-{
-  "erro": "Memória não encontrada."
-}
-```
+### Opção 3 — GitHub Pages
+O deploy é automático via GitHub Actions a cada push na branch `main`.  
+O workflow serve **apenas a pasta `frontend/`**.
 
 ---
 
-## 🐍 Back-end (Futura Implementação)
+## 📝 Como Editar as Memórias
 
-O back-end será desenvolvido em **Python com Flask** e deverá:
+Abra `frontend/data/memories.json`. Cada chave é a **palavra-chave** que o usuário digita:
 
-1. **Servir a API REST** na porta `5000`
-2. **Armazenar as memórias** em um banco de dados (SQLite ou PostgreSQL)
-3. **Implementar as rotas** conforme descrito na seção de integração
+```json
+{
+  "palavra-chave": {
+    "titulo": "Título exibido na tela",
+    "cards": [
+      {
+        "imagem": "./assets/fotos/nome-do-arquivo.jpg",
+        "texto": "Texto que aparece embaixo da foto."
+      }
+    ]
+  }
+}
+```
 
-### Estrutura esperada:
+**Dicas:**
+- A ordem dos cards no array é a ordem de exibição (a ilustração/lembrança vem primeiro)
+- Para adicionar uma nova memória, adicione uma nova chave ao JSON
+- Para alterar a palavra-chave, renomeie a chave
+- Para adicionar texto, preencha o campo `"texto"` de cada card
 
-- `backend/app/__init__.py` — Inicialização do app Flask
-- `backend/app/routes.py` — Definição das rotas da API
-- `backend/app/models.py` — Modelos do banco de dados
-- `backend/requirements.txt` — Dependências Python
-- `backend/run.py` — Ponto de entrada do servidor
+---
 
-### Para instalar e rodar (quando implementado):
+## 🖼️ Como Adicionar Fotos
+
+1. Coloque o arquivo em `frontend/assets/fotos/`
+2. Referencie no JSON como `"./assets/fotos/nome-do-arquivo.jpg"`
+
+> As fotos também estão disponíveis na pasta `fotos_flor/` na raiz do projeto (backup original).
+
+---
+
+## 🐍 Back-end Local (opcional)
+
+O back-end Flask existe como alternativa para uso local. Ele serve as fotos diretamente de `fotos_flor/` via API REST.
 
 ```bash
 cd backend
-pip install -r requirements.txt
-python run.py
+python3 run.py
+# API disponível em: http://localhost:5000/api/memory/<codigo>
 ```
+
+> Para instalar as dependências: `python3 -m pip install flask flask-cors`
 
 ---
 
-## 📋 Tecnologias Utilizadas
+## 📋 Tecnologias
 
-| Camada     | Tecnologia                  |
-| ---------- | --------------------------- |
-| Front-end  | HTML5, CSS3, JavaScript ES6 |
-| Back-end   | Python, Flask *(planejado)* |
-| Fontes     | Google Fonts                |
-| Hospedagem | Localhost (desenvolvimento) |
+| Camada     | Tecnologia                          |
+| ---------- | ----------------------------------- |
+| Front-end  | HTML5, CSS3, JavaScript ES6         |
+| Dados      | JSON estático (`data/memories.json`)|
+| Fontes     | Google Fonts (Playfair, Lato, Alegreya) |
+| Back-end   | Python + Flask *(uso local)*        |
+| Hospedagem | GitHub Pages                        |
 
 ---
 
