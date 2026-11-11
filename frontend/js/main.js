@@ -115,6 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
         text.textContent = card.texto || '';
         body.appendChild(text);
 
+        if (card.botao && card.destino) {
+            const action = document.createElement('a');
+            action.className = 'memory-card__action';
+            action.href = card.destino;
+            action.textContent = card.botao;
+            body.appendChild(action);
+        }
+
         article.appendChild(imageWrap);
         article.appendChild(body);
         return article;

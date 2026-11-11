@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Uma mensagem especial de aniversário para Raquel.">
+    <title>Feliz aniversário, Raquel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Alegreya:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="petals-container" aria-hidden="true">
+        <div class="petal petal--1"></div>
+        <div class="petal petal--2"></div>
+        <div class="petal petal--3"></div>
+        <div class="petal petal--4"></div>
+        <div class="petal petal--5"></div>
+        <div class="petal petal--6"></div>
+    </div>
+
+    <main class="main">
+        <header class="header">
+            <p class="header__rose" aria-hidden="true">🌷</p>
+            <h1 class="header__title">Feliz aniversário, Raquel</h1>
+            <p class="header__subtitle">Para o meu lírio, com todo o meu amor.</p>
+        </header>
+
+        <section class="memory-section" aria-labelledby="birthday-title">
+            <div class="memory-section__header">
+                <div class="memory-divider" aria-hidden="true">
+                    <span class="memory-divider__icon">❀</span>
+                </div>
+                <h2 id="birthday-title" class="memory-section__title">O que dizer?</h2>
+            </div>
+
+            <div class="memory-cards memory-cards--single" role="list">
+                <article class="memory-card" role="listitem">
+                    <div class="memory-card__image-wrap">
+                        <video class="memory-card__video" controls playsinline preload="metadata">
+                            <source src="./assets/fotos/niver-pulsando.mp4" type="video/mp4">
+                            Seu navegador não consegue reproduzir este vídeo.
+                        </video>
+                    </div>
+                    <div class="memory-card__body">
+                        <p class="memory-card__text">
+                            Raquel, que seu novo ciclo seja cheio de alegrias, sonhos realizados e momentos lindos.
+                            Obrigado por deixar meus dias mais felizes. Feliz aniversário, meu amor. Te amo, meu lírio!
+                        </p>
+                        <p class="memory-card__text">Faltam para o próximo aniversário:</p>
+                        <div class="birthday-countdown" role="timer" aria-label="Contagem regressiva para 19 de novembro">
+                            <div class="birthday-countdown__unit">
+                                <span class="birthday-countdown__value" data-countdown="days">0</span>
+                                <span class="birthday-countdown__label">dias</span>
+                            </div>
+                            <div class="birthday-countdown__unit">
+                                <span class="birthday-countdown__value" data-countdown="hours">00</span>
+                                <span class="birthday-countdown__label">horas</span>
+                            </div>
+                            <div class="birthday-countdown__unit">
+                                <span class="birthday-countdown__value" data-countdown="minutes">00</span>
+                                <span class="birthday-countdown__label">minutos</span>
+                            </div>
+                            <div class="birthday-countdown__unit">
+                                <span class="birthday-countdown__value" data-countdown="seconds">00</span>
+                                <span class="birthday-countdown__label">segundos</span>
+                            </div>
+                        </div>
+                        <a class="memory-card__back-link" href="./index.html">Voltar às lembranças</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p class="footer__text">Feito com <span class="footer__heart">♥</span> para você</p>
+        </footer>
+    </main>
+
+    <script src="js/niver.js"></script>
+</body>
+
+</html>

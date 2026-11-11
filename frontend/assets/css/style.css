@@ -440,6 +440,78 @@ body {
     min-height: 1.5rem;
 }
 
+.memory-card__action {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.25rem auto 0;
+    padding: 0.75rem 1.25rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-rosa-dark));
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-btn);
+    font-family: var(--ff-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: transform var(--transition), filter var(--transition);
+}
+
+.memory-card__action:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+}
+
+.memory-card__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #241e1b;
+}
+
+.birthday-countdown {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+.birthday-countdown__unit {
+    padding: 0.75rem 0.35rem;
+    background: rgba(220, 174, 150, 0.16);
+    border: 1px solid rgba(220, 174, 150, 0.3);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.birthday-countdown__value {
+    display: block;
+    color: var(--clr-rosa-dark);
+    font-family: var(--ff-heading);
+    font-size: clamp(1.15rem, 5vw, 1.7rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+}
+
+.birthday-countdown__label {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--clr-text-light);
+    font-size: 0.75rem;
+}
+
+.memory-card__back-link {
+    display: block;
+    width: fit-content;
+    margin: 1.25rem auto 0;
+    color: var(--clr-rosa-dark);
+    font-weight: 700;
+    text-align: center;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
 /* ---------- Footer ---------- */
 .footer {
     margin-top: 4rem;

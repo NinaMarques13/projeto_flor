@@ -119,5 +119,16 @@
         "texto": "Eu sei que não gostaria de ver essa foto kkkk. Mas é aqui onde eu vou deixar um trecho importante pra mim. Raquel , eu te amo muito. eu quero que esse seja o primeiro de muitos aniversários e quando digo que escolhi você, as vezes parece mentira porque a sensação de fato é mais como seu eu não tivesse escolha, apareceu a mulher com quem vou casar kkkkk. Sério feliz um ano e um mês, há vários adjetivos que cabem a mim e louco é um deles e eu não me arrependo de ser louco e tentar a sorte nunca. Te amo meu lírio"
       }
     ]
+  },
+  "lirio": {
+    "titulo": "Feliz aniversário, Raquel",
+    "cards": [
+      {
+        "imagem": "./assets/fotos/niver-animado.jfif",
+        "texto": "Feliz aniversário, meu lírio. Que seu novo ciclo seja tão lindo quanto o sorriso que ilumina os meus dias. Te amo!",
+        "botao": "o que dizer?",
+        "destino": "./niver.html"
+      }
+    ]
   }
 }
