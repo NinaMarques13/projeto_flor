@@ -35,7 +35,9 @@ async function fetchMemory(codigo) {
         throw new Error('⚠️ Não foi possível carregar as memórias. Tente recarregar a página.');
     }
 
-    const memoria = todas[codigo.trim().toLowerCase()];
+    const codigoNormalizado = normalizarCodigo(codigo);
+    const memoria = Object.entries(todas)
+        .find(([chave]) => normalizarCodigo(chave) === codigoNormalizado)?.[1];
 
     if (!memoria) {
         throw new Error(
@@ -45,4 +47,8 @@ async function fetchMemory(codigo) {
     }
 
     return memoria;
+}
+
+function normalizarCodigo(codigo) {
+    return codigo.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
