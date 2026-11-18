@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         hideError();
         hideMemory();
         btnDecode.disabled = true;
+        btnDecode.setAttribute('aria-busy', 'true');
+        const buttonText = btnDecode.querySelector('.decoder__button-text');
+        if (buttonText) buttonText.textContent = 'Desabrochando...';
 
         try {
             const memoria = await fetchMemory(codigo);
@@ -49,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(error.message);
         } finally {
             btnDecode.disabled = false;
+            btnDecode.removeAttribute('aria-busy');
+            if (buttonText) buttonText.textContent = 'Desabrochar';
         }
     }
 

@@ -22,12 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
         countdownValues.seconds.textContent = String(seconds).padStart(2, '0');
     }
 
+    if (!Object.values(countdownValues).every(Boolean) || !stopButton) return;
+
     updateCountdown();
-    const timerId = window.setInterval(updateCountdown, 1000);
+    let timerId = window.setInterval(updateCountdown, 1000);
 
     stopButton.addEventListener('click', () => {
+        if (timerId === null) return;
         updateCountdown();
         window.clearInterval(timerId);
+        timerId = null;
         stopButton.disabled = true;
         stopButton.textContent = 'Relógio parado';
     });

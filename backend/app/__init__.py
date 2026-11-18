@@ -10,6 +10,7 @@ def create_app():
     # Resolve caminho absoluto para fotos_flor (dois níveis acima de backend/app/)
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     app.config['FOTOS_DIR'] = os.path.join(project_root, 'fotos_flor')
+    app.config['FRONTEND_DIR'] = os.path.join(project_root, 'frontend')
 
     from . import routes
     app.register_blueprint(routes.bp)

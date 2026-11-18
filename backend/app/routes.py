@@ -1,97 +1,27 @@
 """
-routes.py — Rotas da API
+routes.py - Rotas da API.
 
-Banco de memórias sem SGBD: dicionário Python.
-Cada chave é uma palavra-chave digitada pelo usuário.
-Cada memória tem um título e uma lista de cards (foto + texto).
-
-► Para adicionar/editar memórias: modifique o dict MEMORIAS abaixo.
-► Para trocar palavras-chave: mude as chaves do dict.
-► Para adicionar texto nos cards: preencha o campo "texto" de cada card.
+Le as memórias do mesmo arquivo JSON usado pelo front-end estático,
+mantendo os dois modos de execução sincronizados.
 """
 
+import json
 import os
+import unicodedata
 from flask import Blueprint, jsonify, request, send_from_directory, current_app
 
 bp = Blueprint('main', __name__)
 
-# ─── Banco de Memórias ────────────────────────────────────────────────────────
-# Estrutura:
-#   "palavra-chave" → {
-#       "titulo": str,
-#       "cards":  [{ "foto": filename_em_fotos_flor, "texto": str }, ...]
-#   }
-#
-# Os textos estão em branco — preencha quando quiser.
-# ─────────────────────────────────────────────────────────────────────────────
+def normalizar_codigo(codigo):
+    texto = unicodedata.normalize('NFD', codigo.strip().lower())
+    return ''.join(char for char in texto if unicodedata.category(char) != 'Mn')
 
-MEMORIAS = {
-    "0": {
-        "titulo": "Memória 0",
-        "cards": [
-            {"foto": "foto_0.jpg",      "texto": ""},
-            {"foto": "foto_0.1.jpg",    "texto": ""},
-            {"foto": "lembrança_0.png", "texto": ""},
-        ],
-    },
-    "1": {
-        "titulo": "Memória 1",
-        "cards": [
-            {"foto": "foto_1.jpg",      "texto": ""},
-            {"foto": "foto_1.1.jpg",    "texto": ""},
-            {"foto": "foto_1.2.jpg",    "texto": ""},
-            {"foto": "lembrança_1.png", "texto": ""},
-        ],
-    },
-    "2": {
-        "titulo": "Memória 2",
-        "cards": [
-            {"foto": "lembrança_2.png", "texto": ""},
-        ],
-    },
-    "3": {
-        "titulo": "Memória 3",
-        "cards": [
-            {"foto": "lembrança_3.png", "texto": ""},
-        ],
-    },
-    "4": {
-        "titulo": "Memória 4",
-        "cards": [
-            {"foto": "lembrança_4.png", "texto": ""},
-        ],
-    },
-    "5": {
-        "titulo": "Memória 5",
-        "cards": [
-            {"foto": "foto_5.jpg",      "texto": ""},
-            {"foto": "foto_5.1.jpg",    "texto": ""},
-            {"foto": "lembrança_5.png", "texto": ""},
-        ],
-    },
-    "6": {
-        "titulo": "Memória 6",
-        "cards": [
-            {"foto": "lembrança_6.png", "texto": ""},
-        ],
-    },
-    "7": {
-        "titulo": "Memória 7",
-        "cards": [
-            {"foto": "lembrança_7.png", "texto": ""},
-        ],
-    },
-    "8": {
-        "titulo": "Memória 8",
-        "cards": [
-            {"foto": "foto_8.jpg",       "texto": ""},
-            {"foto": "foto_8.png",       "texto": ""},
-            {"foto": "foto_8.1.png",     "texto": ""},
-            {"foto": "lembrança_8.png",  "texto": ""},
-            {"foto": "lembrança_8.1.png","texto": ""},
-        ],
-    },
-}
+
+def carregar_memorias():
+    frontend_dir = current_app.config['FRONTEND_DIR']
+    caminho = os.path.join(frontend_dir, 'data', 'memories.json')
+    with open(caminho, 'r', encoding='utf-8') as arquivo:
+        return json.load(arquivo)
 
 
 # ─── Rota: buscar memória ─────────────────────────────────────────────────────
@@ -99,21 +29,34 @@ MEMORIAS = {
 @bp.route('/api/memory/<string:codigo>')
 def get_memory(codigo):
     """Retorna os dados de uma memória pelo código/palavra-chave."""
-    memoria = MEMORIAS.get(codigo.strip().lower())
-    if not memoria:
+    codigo_normalizado = normalizar_codigo(codigo)
+    memorias = carregar_memorias()
+    memoria = next(
+        (
+            dados
+            for chave, dados in memorias.items()
+            if normalizar_codigo(chave) == codigo_normalizado
+        ),
+        None,
+    )
+    if memoria is None:
         return jsonify({"erro": "Memória não encontrada."}), 404
 
-    # Constrói URLs absolutas para as imagens usando o host atual
     base_url = request.host_url.rstrip('/')
+    cards = []
+    for card in memoria.get('cards', []):
+        result_card = dict(card)
+        imagem = result_card.get('imagem', '')
+        if imagem.startswith('./assets/'):
+            result_card['imagem'] = base_url + '/' + imagem[2:]
+        elif imagem:
+            result_card['imagem'] = f"{base_url}/fotos/{os.path.basename(imagem)}"
+        cards.append(result_card)
+
     result = {
-        "titulo": memoria["titulo"],
-        "cards": [
-            {
-                "imagem": f"{base_url}/fotos/{card['foto']}",
-                "texto": card["texto"],
-            }
-            for card in memoria["cards"]
-        ],
+        "titulo": memoria.get("titulo", ""),
+        "layout": memoria.get("layout"),
+        "cards": cards,
     }
     return jsonify(result)
 
@@ -124,3 +67,9 @@ def get_memory(codigo):
 def serve_foto(filename):
     """Serve as imagens da pasta fotos_flor/."""
     return send_from_directory(current_app.config['FOTOS_DIR'], filename)
+
+
+@bp.route('/assets/<path:filename>')
+def serve_asset(filename):
+    """Serve os arquivos usados pelo front-end."""
+    return send_from_directory(current_app.config['FRONTEND_DIR'], os.path.join('assets', filename))

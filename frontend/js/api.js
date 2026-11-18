@@ -35,6 +35,9 @@ async function fetchMemory(codigo) {
         const response = await fetch('./data/memories.json');
         if (!response.ok) throw new Error('file_not_found');
         todas = await response.json();
+        if (!todas || typeof todas !== 'object' || Array.isArray(todas)) {
+            throw new Error('invalid_data');
+        }
     } catch {
         throw new Error('⚠️ Não foi possível carregar as memórias. Tente recarregar a página.');
     }
@@ -48,6 +51,10 @@ async function fetchMemory(codigo) {
             '🔍 Código não encontrado. ' +
             'Verifique se digitou corretamente o código da pétala.'
         );
+    }
+
+    if (!Array.isArray(memoria.cards)) {
+        throw new Error('⚠️ Esta memória está com o conteúdo indisponível. Tente novamente.');
     }
 
     return memoria;

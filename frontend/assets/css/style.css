@@ -286,6 +286,19 @@ body {
     box-shadow: 0 2px 8px rgba(201, 168, 76, 0.30);
 }
 
+.decoder__button:focus-visible,
+.memory-card__action:focus-visible,
+.memory-card__back-link:focus-visible {
+    outline: 3px solid rgba(201, 168, 76, 0.45);
+    outline-offset: 3px;
+}
+
+.decoder__button:disabled {
+    cursor: wait;
+    filter: grayscale(0.15);
+    opacity: 0.8;
+}
+
 .decoder__button-icon {
     font-size: 1.3rem;
     transition: transform 0.4s ease;
@@ -438,6 +451,38 @@ body {
     line-height: 1.85;
     text-align: center;
     min-height: 1.5rem;
+}
+
+.memory-card__formatted-text {
+    font-family: var(--ff-card);
+    text-align: center;
+}
+
+.memory-card__formatted-title {
+    font-family: var(--ff-heading);
+    color: var(--clr-rosa-dark);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.memory-card__formatted-highlight {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.memory-card__formatted-label {
+    font-family: var(--ff-heading);
+    margin: 0.75rem 0 0.35rem;
+}
+
+.memory-card__formatted-list {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0.75rem 1.25rem;
+}
+
+.memory-card__formatted-message {
+    line-height: 1.75;
 }
 
 .memory-card__action {
