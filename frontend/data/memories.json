@@ -135,15 +135,17 @@
             "Para pacientes terminais isso faz eles geralmente desistirem."
           ],
           "mensagem": "O porque dessas informações, a gente tende a catastrofisar demais as coisas as vezes, tornar o aniversário uma sentença, \"nossa eu não tenho isso, eu estou aqui não ali\". As vezes isso dispara nossa ansiedade, eu penso em algo que alguem me disse \"Você está ai, com ansiedade e etc, você chegou ate ai!\" Hoje tira um tempo para descansar, se for para ficar reflexivo, pense nas várias mensagens das pessoas, na confraternização de todos, reunido no seu dia, não perca tempo com cobranças desnecessárias."
-        },
+        }
+      },
+      {
+        "imagem": "./assets/fotos/niver2.jpeg",
+        "texto": "Dito isso, meu amor, é muito bom é muito bom ter te conhecido, passar tempo e criar memórias, eu quero que hajam mais e mais e que você se sinta bem e amada."
+      },
+      {
+        "imagem": "./assets/fotos/niver3.jpeg", 
+        "texto": "Quero que se sinta amada, assim como eu me sinto, que se sinta feliz, assim como eu me sinto, que se sinta segura, assim como eu me sinto. Mas bem o que dizer ainda?",
         "botao": "o que dizer?",
         "destino": "./niver.html"
-      },
-      {
-        "imagem": "./assets/fotos/niver2.jpeg"
-      },
-      {
-        "imagem": "./assets/fotos/niver3.jpeg"
       }
     ]
   }
