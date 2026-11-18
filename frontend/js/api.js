@@ -9,8 +9,12 @@
  * {
  *   "palavra-chave": {
  *     "titulo": "Nome da memória",
+ *     "layout": "birthday", // opcional: layout especial de aniversário
  *     "cards": [
  *       { "imagem": "./assets/fotos/foto.jpg", "texto": "..." },
+ *       { "imagem": "./assets/fotos/foto.jpg", "texto": {
+ *         "titulo": "...", "destaque": "...", "fatores": ["..."], "mensagem": "..."
+ *       } },
  *       ...
  *     ]
  *   }

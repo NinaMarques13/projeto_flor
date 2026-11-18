@@ -70,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         memoryCards.className = isSingle
             ? 'memory-cards memory-cards--single'
             : 'memory-cards';
+        if (memoria.layout === 'birthday') {
+            memoryCards.classList.add('memory-cards--birthday');
+        }
 
         // Renderiza cada card com delay escalonado via CSS custom property
         memoria.cards.forEach((card, index) => {
@@ -110,10 +113,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const body = document.createElement('div');
         body.className = 'memory-card__body';
 
-        const text = document.createElement('p');
-        text.className = 'memory-card__text';
-        text.textContent = card.texto || '';
-        body.appendChild(text);
+        if (typeof card.texto === 'string' && card.texto) {
+            const text = document.createElement('p');
+            text.className = 'memory-card__text';
+            text.textContent = card.texto;
+            body.appendChild(text);
+        } else if (card.texto && typeof card.texto === 'object') {
+            const formattedText = document.createElement('div');
+            formattedText.className = 'memory-card__formatted-text';
+
+            const heading = document.createElement('h3');
+            heading.className = 'memory-card__formatted-title';
+            heading.textContent = card.texto.titulo;
+            formattedText.appendChild(heading);
+
+            const highlight = document.createElement('p');
+            highlight.className = 'memory-card__formatted-highlight';
+            highlight.textContent = card.texto.destaque;
+            formattedText.appendChild(highlight);
+
+            if (Array.isArray(card.texto.fatores) && card.texto.fatores.length) {
+                const factorsTitle = document.createElement('h4');
+                factorsTitle.className = 'memory-card__formatted-label';
+                factorsTitle.textContent = 'Fatores mencionados';
+                formattedText.appendChild(factorsTitle);
+
+                const factors = document.createElement('ul');
+                factors.className = 'memory-card__formatted-list';
+                card.texto.fatores.forEach((factor) => {
+                    const item = document.createElement('li');
+                    item.textContent = factor;
+                    factors.appendChild(item);
+                });
+                formattedText.appendChild(factors);
+            }
+
+            const message = document.createElement('p');
+            message.className = 'memory-card__formatted-message';
+            message.textContent = card.texto.mensagem;
+            formattedText.appendChild(message);
+            body.appendChild(formattedText);
+        }
 
         if (card.botao && card.destino) {
             const action = document.createElement('a');
@@ -124,7 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         article.appendChild(imageWrap);
-        article.appendChild(body);
+        if (body.childElementCount) {
+            article.appendChild(body);
+        }
         return article;
     }
 

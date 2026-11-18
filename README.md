@@ -101,6 +101,7 @@ Abra `frontend/data/memories.json`. Cada chave é a **palavra-chave** que o usu�
 - Para adicionar uma nova memória, adicione uma nova chave ao JSON
 - Para alterar a palavra-chave, renomeie a chave
 - Para adicionar texto, preencha o campo `"texto"` de cada card
+- A memória `"lirio"` usa texto estruturado (`titulo`, `destaque`, `fatores` e `mensagem`) para destacar as partes da mensagem; `layout: "birthday"` ativa o grid especial de aniversário
 
 ---
 

@@ -122,12 +122,28 @@
   },
   "lirio": {
     "titulo": "Feliz aniversário, Raquel",
+    "layout": "birthday",
     "cards": [
       {
-        "imagem": "./assets/fotos/niver-animado.jfif",
-        "texto": "Fatos curiosos sobre aniversários\n1 - Você têm o dobro de chance de morrer\n * Fatores:\n   * 1 - Aumento do consumo de Alcool.\n   * 2 - Estresse e carga emocional\n   * 3 - Para pacientes terminais isso faz eles geralmente desistirem.\nO porque dessas informações, a gente tende a catastrofisar demais as coisas as vezes, tornar o aniversário uma sentença, \"nossa eu não tenho isso, eu estou aqui não ali\". As vezes isso dispara nossa ansiedade, eu penso em algo que alguem me disse \"Você está ai, com ansiedade e etc, você chegou ate ai!\" Hoje tira um tempo para descansar, se for para ficar reflexivo, pense nas várias mensagens das pessoas, na confraternização de todos, reunido no seu dia, não perca tempo com cobranças desnecessárias.",
+        "imagem": "./assets/fotos/niver1.jpeg",
+        "texto": {
+          "titulo": "Fatos curiosos sobre aniversários",
+          "destaque": "1 - Você têm o dobro de chance de morrer",
+          "fatores": [
+            "Aumento do consumo de Alcool.",
+            "Estresse e carga emocional",
+            "Para pacientes terminais isso faz eles geralmente desistirem."
+          ],
+          "mensagem": "O porque dessas informações, a gente tende a catastrofisar demais as coisas as vezes, tornar o aniversário uma sentença, \"nossa eu não tenho isso, eu estou aqui não ali\". As vezes isso dispara nossa ansiedade, eu penso em algo que alguem me disse \"Você está ai, com ansiedade e etc, você chegou ate ai!\" Hoje tira um tempo para descansar, se for para ficar reflexivo, pense nas várias mensagens das pessoas, na confraternização de todos, reunido no seu dia, não perca tempo com cobranças desnecessárias."
+        },
         "botao": "o que dizer?",
         "destino": "./niver.html"
+      },
+      {
+        "imagem": "./assets/fotos/niver2.jpeg"
+      },
+      {
+        "imagem": "./assets/fotos/niver3.jpeg"
       }
     ]
   }
