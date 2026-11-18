@@ -125,7 +125,13 @@
     "cards": [
       {
         "imagem": "./assets/fotos/niver-animado.jfif",
-        "texto": "Feliz aniversário, meu lírio. Que seu novo ciclo seja tão lindo quanto o sorriso que ilumina os meus dias. Te amo!",
+        "texto": "Fatos curiosos sobre aniversários
+1 - Você têm o dobro de chance de morrer
+ * Fatores:
+   * 1 - Aumento do consumo de Alcool.
+   * 2 - Estresse e carga emocional
+   * 3 - Para pacientes terminais isso faz eles geralmente desistirem.
+O porque dessas informações, a gente tende a catastrofisar demais as coisas as vezes, tornar o aniversário uma sentença, "nossa eu não tenho isso, eu estou aqui não ali". As vezes isso dispara nossa ansiedade, eu penso em algo que alguem me disse "Você está ai, com ansiedade e etc, você chegou ate ai!" Hoje tira um tempo para descansar, se for para ficar reflexivo, pense nas várias mensagens das pessoas, na confraternização de todos, reunido no seu dia, não perca tempo com cobranças desnecessárias.",
         "botao": "o que dizer?",
         "destino": "./niver.html"
       }
