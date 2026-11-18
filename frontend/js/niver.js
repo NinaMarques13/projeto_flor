@@ -5,20 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
         minutes: document.querySelector('[data-countdown="minutes"]'),
         seconds: document.querySelector('[data-countdown="seconds"]'),
     };
+    const stopButton = document.getElementById('stop-countdown');
 
     function updateCountdown() {
         const now = new Date();
-        let birthday = new Date(now.getFullYear(), 10, 19);
-
-        if (birthday <= now) {
-            birthday = new Date(now.getFullYear() + 1, 10, 19);
-        }
-
-        const remainingSeconds = Math.max(0, Math.floor((birthday - now) / 1000));
-        const days = Math.floor(remainingSeconds / 86400);
-        const hours = Math.floor((remainingSeconds % 86400) / 3600);
-        const minutes = Math.floor((remainingSeconds % 3600) / 60);
-        const seconds = remainingSeconds % 60;
+        const start = new Date(2026, 10, 19);
+        const elapsedSeconds = Math.max(0, Math.floor((now - start) / 1000));
+        const days = Math.floor(elapsedSeconds / 86400);
+        const hours = Math.floor((elapsedSeconds % 86400) / 3600);
+        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        const seconds = elapsedSeconds % 60;
 
         countdownValues.days.textContent = String(days);
         countdownValues.hours.textContent = String(hours).padStart(2, '0');
@@ -27,5 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCountdown();
-    window.setInterval(updateCountdown, 1000);
+    const timerId = window.setInterval(updateCountdown, 1000);
+
+    stopButton.addEventListener('click', () => {
+        updateCountdown();
+        window.clearInterval(timerId);
+        stopButton.disabled = true;
+        stopButton.textContent = 'Relógio parado';
+    });
 });

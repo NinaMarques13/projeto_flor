@@ -501,6 +501,16 @@ body {
     font-size: 0.75rem;
 }
 
+.birthday-countdown__stop {
+    margin-top: 1rem;
+}
+
+.birthday-countdown__stop:disabled {
+    cursor: default;
+    filter: grayscale(0.2);
+    opacity: 0.75;
+}
+
 .memory-card__back-link {
     display: block;
     width: fit-content;
